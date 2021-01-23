@@ -1,0 +1,9 @@
+@mixin flexbox($dir : row, $justify : flex-start, $align : stretch, $flex-wrap : nowrap){
+    display: flex;
+    flex-direction: $dir;
+    justify-content: $justify;
+    align-items: $align;
+    flex-wrap: $flex-wrap;
+}
+
+$width : 1175px;
