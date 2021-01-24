@@ -1,0 +1,30 @@
+@import "./mixins";
+
+
+.categories{
+    width: 80%;
+    background-color: white;
+    padding : 3.4rem 2.3rem;
+    border-radius: 8px;
+    &__title{
+        text-transform: uppercase;
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+    }
+    &__list{
+        width: 100%;
+        li {
+            font-size: 1.6rem;
+            font-weight: 400;
+            height: 2rem;
+            padding-bottom: 3.4rem;
+            margin : 1rem 0px;
+            border-bottom : 1px solid rgb(214, 214, 214);
+            &:last-child{
+                border-bottom: 1px solid transparent;
+                padding-bottom: 0px;
+            }
+        }
+    }
+}
