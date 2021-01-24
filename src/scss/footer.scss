@@ -1,0 +1,38 @@
+@import "./mixins";
+
+.footer {
+    margin : auto;
+    width: $width;
+    & div:nth-child(1){
+        width: 18%;
+    }
+    @include flexbox(row, space-between);
+    &__logo {
+        font-size: 4rem;
+        font-weight: 700;
+    }
+    &__copyright {
+        margin-top: 2rem;
+        opacity : 0.5;
+    }
+    .contact {
+        width: 20%;
+        text-align: center;
+        &__title {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        &__email {
+            opacity: 0.6;
+            font-size: 1.4rem;
+            margin : 2rem 0px;
+        }
+        &__social {
+            & img {
+                height: 1.8rem;
+                width: 1.8rem;
+                margin-right: 1rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+@import "./mixins";
+
+.breadcrumb{
+    height: 100px;
+    width: $width;
+    margin: 0px auto;
+    @include flexbox(row, space-between, center);
+    &__title{
+        font-weight: 600;
+        opacity: 0.8;
+        font-size: 2.5rem;
+    }
+    &__detail{
+        text-transform: uppercase;
+        font-size: 1.6rem;
+        color :$secondary-color;
+    }
+}

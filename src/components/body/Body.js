@@ -12,11 +12,18 @@ export default function Body(props){
                 </div>
                 <div className="body__items">
                     <Item />
+                    <Item />
+                    <Item />
+                    <Item />
+                    <Item />
+                    <Item />
                 </div>
             </div>
-            <div className="body__pagination">
-                
+            <div className="pagination">
+                <div className="pagination__before">1</div>
+                <div className="pagination__current">2</div>
+                <div className="pagination__after">3</div>
             </div>
         </div>
-    );
+    );  
 }

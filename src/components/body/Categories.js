@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-
+import "../../scss/categories.scss"
 class Categories extends Component {
     render() { 
         return (
             <div className="categories">
-                <h3>Categories</h3>
+                <h3 className="categories__title">Categories</h3>
                 <ul className="categories__list">
-                {
-                    this.props.categories.map((c) => <li>{c}</li>)
-                }
+                    <li className="categories__item">Blog</li>
+                    <li className="categories__item">Review</li>
+                    <li className="categories__item">Note</li>
                 </ul>
             </div>
         );
