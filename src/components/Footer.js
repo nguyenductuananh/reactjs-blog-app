@@ -11,8 +11,8 @@ export default function Footer(){
                 <h4 className="contact__title">Contact me</h4>
                 <p className="contact__email">Yukine@gmail.com</p>
                 <div className="contact__social">
-                    <a href="#"><img src="./facebook.svg" alt="fb" /></a>
-                    <a href="#"><img src="./instagram.svg" alt="ig" /></a>
+                    <a href="./"><img src="./facebook.svg" alt="fb" /></a>
+                    <a href="./"><img src="./instagram.svg" alt="ig" /></a>
                 </div>
             </div>
         </footer>
