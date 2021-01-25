@@ -6,9 +6,9 @@ class Categories extends Component {
             <div className="categories">
                 <h3 className="categories__title">Categories</h3>
                 <ul className="categories__list">
-                    <li className="categories__item">Blog</li>
-                    <li className="categories__item">Review</li>
-                    <li className="categories__item">Note</li>
+                    {
+                        this.props.data.map((c) => <li key={c._id} className="categories__item">{c.name}</li>)
+                    }
                 </ul>
             </div>
         );
