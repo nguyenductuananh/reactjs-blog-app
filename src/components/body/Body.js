@@ -5,13 +5,14 @@ import Item from './Item';
 export default class Body extends Component{
     state = {}
     async componentDidMount(){
-        console.log("Did Mount")
+        let data = {};
         let res = await fetch("http://localhost:1902/api/category");
-        let data  = await res.json();
-        this.setState({categories : data});
+        let categories  = await res.json();
+        data.categories = categories;
+        await fetch("http://localhost:1902/api/status").then(res => res.json()).then(d => data.items = d);
+        this.setState(data);
     }
     render(){
-        console.log("Render")
         return (
             <div className="body--bg">
                 <div className="body">
@@ -20,12 +21,9 @@ export default class Body extends Component{
                         <Categories data={this.state.categories ? this.state.categories : [] } />
                     </div>
                     <div className="body__items">
-                        <Item />
-                        <Item />
-                        <Item />
-                        <Item />
-                        <Item />
-                        <Item />
+                        {
+                            this.state.items ? (this.state.items.length === 0 ? <h1>Nothing to show</h1> : this.state.items.map(i => <Item key={i._id} data={i} />)) : <h1>Loading...</h1>
+                        }
                     </div>
                 </div>
                 <div className="pagination">

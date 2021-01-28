@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import "./scss/index.scss";
 import {default as Header} from './components/Header'
 import Breadcrumb from './components/Breadcrumb';
