@@ -3,10 +3,11 @@ import queryString from "query-string";
 import Categories from "./Categories";
 import Item from "./Item";
 import "../../scss/body.scss";
+import Search from "./Search";
 
 function Body() {
   const [filters, setFilters] = useState({ page: 1, limit: 4 });
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([{ _id: 0, name: "All" }]);
   const [items, setItems] = useState([]);
   const [isShowAll, setIsShowAll] = useState(true);
   let urlPattern = "http://localhost:1902/api/";
@@ -17,65 +18,63 @@ function Body() {
   }
 
   async function handleFilterCategory(category) {
-    let newFilter = { ...filters, page: 1, category };
-    //Fetch
-    let itemRes = await fetch(formatPatternUrl("status", newFilter));
-    let itemData = await itemRes.json();
-    let newItems = [...itemData.data];
-
-    newFilter.max = itemData.filters.max;
-    //setState
+    let newFilter = {
+      ...filters,
+      page: 1,
+      category: category === "All" ? "" : category,
+    };
+    setItems([]);
+    setIsShowAll(true);
     setFilters(newFilter);
-    setItems(newItems);
-    setIsShowAll(!(newItems.length === newFilter.max));
   }
 
   async function loadMore() {
     let loadBtn = document.getElementsByClassName("load-btn")[0];
     loadBtn.textContent = "Loading...";
     let newFilters = { ...filters, page: filters.page + 1 };
-
     setFilters(newFilters);
 
-    let itemRes = await fetch(formatPatternUrl("status", newFilters));
-    let itemData = await itemRes.json();
-    let newItems = items.concat(itemData.data);
-
-    if (newItems.length === filters.max) {
-      setIsShowAll(false);
-    }
-
-    setItems(newItems);
     loadBtn.textContent = "More...";
   }
 
   async function fetchData() {
-    let cateRes = await fetch(urlPattern + "category?");
+    let cateRes = await fetch(urlPattern + "category");
     let itemRes = await fetch(
       urlPattern + "status?" + queryString.stringify(filters)
     );
     let newCategories = await cateRes.json();
-    let newItems = await itemRes.json();
-    let newFilters = { ...filters, max: newItems.filters.max };
-    setFilters(newFilters);
+    newCategories.data.push({ _id: 0, name: "All" });
+    let newItems = [...items];
+    let itemsFetchedData = await itemRes.json();
+    newItems = newItems.concat(itemsFetchedData.data);
     setCategories(newCategories.data);
-    setItems(newItems.data);
+    setItems(newItems);
+    if (newItems.length === itemsFetchedData.filters.max) {
+      setIsShowAll(!isShowAll);
+    }
   }
-
+  //onFilterChange
   useEffect(() => {
     fetchData();
     return () => {};
+  }, [filters]);
+
+  //Init data
+  useEffect(() => {
+    let newFilters = { ...filters };
+    fetchData();
+    setFilters(newFilters);
+    return () => {};
   }, []);
 
+  function handleSearchInputValueChange(val) {
+    console.log(val);
+  }
   return (
     <div className="body--bg">
       <div className="body">
         <div className="body__left">
-          <input
-            type="text"
-            placeholder="Search"
-            className="body__left--input"
-          />
+          <Search onChangeValue={handleSearchInputValueChange} />
           <Categories
             onClickCategory={handleFilterCategory}
             data={categories ? categories : []}
