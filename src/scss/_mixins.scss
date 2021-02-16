@@ -1,11 +1,17 @@
-@mixin flexbox($dir : row, $justify : flex-start, $align : stretch, $flex-wrap : nowrap){
-    display: flex;
-    flex-direction: $dir;
-    justify-content: $justify;
-    align-items: $align;
-    flex-wrap: $flex-wrap;
+@mixin flexbox(
+  $dir: row,
+  $justify: flex-start,
+  $align: stretch,
+  $flex-wrap: nowrap
+) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $flex-wrap;
 }
-$secondary-color : rgb(168, 168, 168);
-$background-color : #e6e6e6;
-$text-color : rgb(30, 32, 90);
-$width : 1175px;
+$secondary-color: rgb(168, 168, 168);
+$background-color: #e6e6e6;
+$primary-pink: #ef534f;
+$text-color: rgb(30, 32, 90);
+$width: 1200px;

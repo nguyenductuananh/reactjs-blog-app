@@ -1,41 +1,115 @@
 @import "./mixins";
 
 .item {
-    height: 400px;
-    font-size: 1.8rem;
-    background-color: white;
-    border-radius: 9px;
+  height: 620px;
+  font-size: 1.8rem;
+  background-color: white;
+  overflow: hidden;
+  width: 98%;
+
+  position: relative;
+  &__cover-img {
+    width: 100%;
+    height: 60%;
     overflow: hidden;
-    width: 98%;
-    &__cover-img{
-        width: 100%;
-        height: 50%;
-        object-fit: cover;
+    object-fit: cover;
+    &::after {
+      content: "";
+      height: inherit;
+      width: inherit;
+      position: absolute;
+      background-color: $primary-pink;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      opacity: 0;
+
+      transition: all 0.3s;
     }
-    &__categories {
-        margin: 2rem;
-        font-size: 1.4rem;
-        text-transform: uppercase;
-        opacity: 0.8;
-        color : $secondary-color;
+    img {
+      transition: 0.3s all;
     }
-    &__title{
-        margin : 2rem;
-        font-size: 2rem;
-        font-weight: 600;
+  }
+  &:hover > &__cover-img::after {
+    opacity: 0.5;
+  }
+  &:hover > &__cover-img img {
+    transform: scale(1.1);
+  }
+
+  &__categories {
+    margin: 2rem 0rem;
+    font-weight: 500;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    color: $primary-pink;
+
+    opacity: 0.8;
+  }
+  &__title {
+    margin: 0.2rem 0rem;
+    font-size: 2rem;
+    font-weight: 500;
+    transition: 0.3s all;
+  }
+
+  &__author {
+    width: 60%;
+    height: 60px;
+    @include flexbox(row, space-between, center);
+    &--info {
+      width: min-content;
+      @include flexbox(row, flex-start, center);
     }
-    &__desc{
-        width: inherit;
-        margin : 2rem;
-        line-height: 1.2;
-        font-size: 1.7rem;
-        // color : $secondary-color;
-        text-overflow: ellipsis;
-        word-wrap: break-word;
-        opacity: 0.5;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
+    &--name {
+      margin-left: 0.9rem;
+      font-weight: 300;
     }
+    &--avatar {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+    }
+
+    &--created {
+      font-size: 1.4rem;
+      opacity: 0.8;
+    }
+  }
+
+  &:hover &__title {
+    color: $primary-pink;
+  }
+  &__desc {
+    width: 95%;
+    margin: 1rem 0rem;
+    margin-bottom: 1.5rem;
+
+    line-height: 1.2;
+    font-size: 1.4rem;
+    opacity: 0.7;
+
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  &__more {
+    text-decoration: none;
+
+    padding-bottom: 0.2rem;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+
+    border-bottom: 1px solid rgba(189, 189, 189, 0.8);
+
+    transition: 0.2s all;
+    &:hover {
+      color: $primary-pink;
+      border-bottom: 1px solid $primary-pink;
+    }
+  }
 }

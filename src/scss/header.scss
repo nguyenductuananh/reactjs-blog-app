@@ -1,31 +1,33 @@
 @import "./mixins";
 
-.header{
-    width: 100%;
-    height: 100px;
-    @include flexbox(row, center, center);
-    background-color: $background-color;
-    header {
-        width: $width;
-        height: 100%;
-        @include flexbox(row, space-between, center);
+.header {
+  width: 100%;
+  height: 100px;
+  @include flexbox(row, center, center);
+  background-color: $background-color;
+  // position: fixed;
+  z-index: 10;
+  header {
+    width: $width;
+    height: 100%;
+    @include flexbox(row, space-between, center);
+  }
+  &__logo {
+    font-size: 3.6rem;
+    font-weight: 700;
+    flex-grow: 1;
+  }
+  &__nav {
+    width: 15%;
+    height: 100%;
+    @include flexbox(row, space-between, center);
+    &--item a {
+      opacity: 0.8;
+      height: 50px;
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: black;
     }
-    &__logo{
-        font-size: 3.6rem;
-        font-weight: 700;
-        flex-grow: 1;
-    }
-    &__nav{
-        width: 15%;
-        height: 100%;
-        @include flexbox(row, space-between, center);
-        &--item a {
-            opacity: 0.8;
-            height: 50px;
-            font-size: 1.8rem;
-            font-weight: 600;
-            text-decoration: none;
-            color : black;
-        }
-    }
+  }
 }

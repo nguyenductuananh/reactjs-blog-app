@@ -6,16 +6,12 @@ import "../../scss/body.scss";
 import Search from "./Search";
 
 function Body() {
-  const [filters, setFilters] = useState({ page: 1, limit: 4 });
+  const [filters, setFilters] = useState({ page: 1, limit: 6 });
+  const [max, setMax] = useState(0);
   const [categories, setCategories] = useState([{ _id: 0, name: "All" }]);
   const [items, setItems] = useState([]);
   const [isShowAll, setIsShowAll] = useState(true);
   let urlPattern = "http://localhost:1902/api/";
-
-  function formatPatternUrl(str, filters) {
-    let url = `${urlPattern}${str}?${queryString.stringify(filters)}`;
-    return url;
-  }
 
   async function handleFilterCategory(category) {
     let newFilter = {
@@ -49,8 +45,12 @@ function Body() {
     newItems = newItems.concat(itemsFetchedData.data);
     setCategories(newCategories.data);
     setItems(newItems);
-    if (newItems.length === itemsFetchedData.filters.max) {
-      setIsShowAll(!isShowAll);
+    let newMax = itemsFetchedData.filters.max;
+    setMax(newMax);
+    if (newItems.length === newMax) {
+      setIsShowAll(false);
+    } else {
+      setIsShowAll(true);
     }
   }
   //onFilterChange
@@ -59,26 +59,23 @@ function Body() {
     return () => {};
   }, [filters]);
 
-  //Init data
-  useEffect(() => {
-    let newFilters = { ...filters };
-    fetchData();
-    setFilters(newFilters);
-    return () => {};
-  }, []);
-
   function handleSearchInputValueChange(val) {
-    console.log(val);
+    let newFilters = { ...filters, page: 1 };
+    newFilters.name = val.name;
+
+    setItems([]);
+    setIsShowAll(true);
+    setFilters(newFilters);
   }
   return (
     <div className="body--bg">
       <div className="body">
         <div className="body__left">
-          <Search onChangeValue={handleSearchInputValueChange} />
-          <Categories
+          {/* <Search onChangeValue={handleSearchInputValueChange} /> */}
+          {/* <Categories
             onClickCategory={handleFilterCategory}
             data={categories ? categories : []}
-          />
+          /> */}
         </div>
         <div className="body__items">
           {items ? (
