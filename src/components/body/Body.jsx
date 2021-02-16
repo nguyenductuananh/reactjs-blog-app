@@ -70,13 +70,16 @@ function Body() {
   return (
     <div className="body--bg">
       <div className="body">
-        <div className="body__left">
+        <div className="body__title">Explore</div>
+        <div className="body__categories">
           {/* <Search onChangeValue={handleSearchInputValueChange} /> */}
           {/* <Categories
             onClickCategory={handleFilterCategory}
             data={categories ? categories : []}
           /> */}
         </div>
+        <div className="body__title">Our Stories</div>
+        <br />
         <div className="body__items">
           {items ? (
             items.length === 0 ? (
