@@ -73,10 +73,10 @@ function Body() {
         <div className="body__title">Explore</div>
         <div className="body__categories">
           {/* <Search onChangeValue={handleSearchInputValueChange} /> */}
-          {/* <Categories
+          <Categories
             onClickCategory={handleFilterCategory}
             data={categories ? categories : []}
-          /> */}
+          />
         </div>
         <div className="body__title">Our Stories</div>
         <br />

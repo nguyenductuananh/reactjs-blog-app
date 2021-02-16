@@ -4,15 +4,12 @@ class Categories extends Component {
   render() {
     return (
       <div className="categories">
-        <h3 className="categories__title">Categories</h3>
         <ul className="categories__list">
           {this.props.data.map((c) => (
-            <li
-              key={c._id}
-              onClick={() => this.props.onClickCategory(c.name)}
-              className="categories__item"
-            >
-              {c.name}
+            <li key={c._id} onClick={() => this.props.onClickCategory(c.name)}>
+              <div className="categories__item">
+                <div className="categories__item--title">{c.name}</div>
+              </div>
             </li>
           ))}
         </ul>

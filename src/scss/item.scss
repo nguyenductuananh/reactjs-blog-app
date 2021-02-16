@@ -27,11 +27,12 @@
       transition: all 0.3s;
     }
     img {
+      width: 100%;
       transition: 0.3s all;
     }
   }
   &:hover > &__cover-img::after {
-    opacity: 0.5;
+    opacity: 0.2;
   }
   &:hover > &__cover-img img {
     transform: scale(1.1);
@@ -60,6 +61,7 @@
     &--info {
       width: min-content;
       @include flexbox(row, flex-start, center);
+      object-fit: cover;
     }
     &--name {
       margin-left: 0.9rem;
