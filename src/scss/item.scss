@@ -2,11 +2,12 @@
 
 .item {
   height: 620px;
+  width: 98%;
   font-size: 1.8rem;
   background-color: white;
   overflow: hidden;
-  width: 98%;
 
+  cursor: pointer;
   position: relative;
   &__cover-img {
     width: 100%;

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 
+import "../../scss/search.scss";
 Search.propTypes = {
   onChangeValue: PropTypes.func,
 };
@@ -23,16 +24,20 @@ function Search(props) {
     typingTimeOut.current = setTimeout(() => {
       //Prop passing from body to process a onChange event
       onChangeValue(search);
+      window.location.href = `${window.location.origin}#list`;
     }, 400);
   }
   return (
-    <input
-      type="text"
-      placeholder="Search"
-      value={value}
-      onChange={handleInputChange}
-      className="body__left--input"
-    />
+    <div className="search">
+      <img alt="magnifier" className="search__icon" src="./magnifier.svg" />
+      <input
+        type="text"
+        placeholder="Search"
+        className="search__input"
+        value={value}
+        onChange={handleInputChange}
+      />
+    </div>
   );
 }
 

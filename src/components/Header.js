@@ -1,6 +1,19 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import "../scss/header.scss";
-function Header() {
+import Search from "./body/Search";
+
+Header.propTypes = {
+  onChangeInputValue: PropTypes.func,
+};
+
+Header.defaultProps = {
+  onChangeInputValue: null,
+};
+
+function Header(props) {
+  const { onChangeInputValue } = props;
   return (
     <div className="header">
       <header>
@@ -13,6 +26,7 @@ function Header() {
             <a href="./">About Me</a>
           </li>
         </ul>
+        <Search onChangeValue={onChangeInputValue} />
       </header>
     </div>
   );

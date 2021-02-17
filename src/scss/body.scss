@@ -1,17 +1,21 @@
 @import "./mixins";
-
 .body--bg {
   width: 100%;
+  margin-top: 15rem;
   .body {
     margin: 0px auto;
     width: $width;
+    &__categories {
+      margin-bottom: 10rem;
+    }
+
     &__title {
       position: relative;
       width: 220px;
       text-align: center;
       font-size: 4rem;
       margin-top: 3rem;
-      font-family: Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Playfair Display", serif;
       &::after {
         content: "";
         height: 60%;
@@ -24,6 +28,7 @@
         z-index: -1;
       }
     }
+
     &__items {
       width: 100%;
       margin-top: 2.2rem;
