@@ -1,38 +1,49 @@
 @import "./mixins";
 
 .footer {
-    margin : auto;
-    width: $width;
-    & div:nth-child(1){
-        width: 18%;
+  margin: auto;
+  width: 100%;
+  height: 280px;
+  background-color: #cceaee;
+  & div:nth-child(1) {
+    width: 18%;
+  }
+  @include flexbox(row, center, center);
+  &__logo {
+    font-size: 4rem;
+    font-weight: 700;
+  }
+  &__copyright {
+    margin-top: 2rem;
+    opacity: 0.5;
+  }
+  .contact {
+    width: 30%;
+    text-align: center;
+    &__title {
+      font-size: 2.2rem;
+      font-weight: 700;
     }
-    @include flexbox(row, space-between);
-    &__logo {
-        font-size: 4rem;
-        font-weight: 700;
+    &__email {
+      opacity: 0.6;
+      font-size: 1.4rem;
+      margin: 2rem 0px;
     }
-    &__copyright {
-        margin-top: 2rem;
-        opacity : 0.5;
+    &__social {
+      width: 100%;
+      height: 2rem;
+      @include flexbox(row, space-between, center);
+      img {
+        height: 2rem;
+        width: 2rem;
+        margin-right: 1rem;
+      }
+      a {
+        @include flexbox(row, center, center);
+        height: 1.8rem;
+        font-size: 1.7rem;
+        text-decoration: none;
+      }
     }
-    .contact {
-        width: 20%;
-        text-align: center;
-        &__title {
-            font-size: 2.2rem;
-            font-weight: 700;
-        }
-        &__email {
-            opacity: 0.6;
-            font-size: 1.4rem;
-            margin : 2rem 0px;
-        }
-        &__social {
-            & img {
-                height: 1.8rem;
-                width: 1.8rem;
-                margin-right: 1rem;
-            }
-        }
-    }
+  }
 }

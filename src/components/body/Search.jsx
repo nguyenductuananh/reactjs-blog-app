@@ -24,7 +24,6 @@ function Search(props) {
     typingTimeOut.current = setTimeout(() => {
       //Prop passing from body to process a onChange event
       onChangeValue(search);
-      window.location.href = `${window.location.origin}#list`;
     }, 400);
   }
   return (

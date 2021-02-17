@@ -42,7 +42,7 @@
   }
   .pagination {
     @include flexbox(row, center);
-    margin: 4rem;
+    margin: 6rem 0rem 3rem 0rem;
     div {
       height: 40px;
       width: 40px;
@@ -57,6 +57,36 @@
     &__current {
       background-color: $text-color !important;
       color: white !important;
+    }
+    .load-btn {
+      @include flexbox(row, center, center);
+      width: 120px;
+      height: 30px;
+      background-color: rgb(240, 176, 116);
+      border-radius: 0.5rem;
+
+      color: rgb(32, 79, 107);
+      outline: none;
+      border: 1px solid white;
+      &__loading {
+        width: 2rem;
+        height: 2rem;
+        background-color: transparent;
+        border-radius: 50%;
+
+        border: 2px solid white;
+        border-left: 2px solid transparent;
+        box-shadow: none;
+        animation: loadingIcon 0.8s infinite forwards;
+      }
+    }
+  }
+  @keyframes loadingIcon {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
     }
   }
 }

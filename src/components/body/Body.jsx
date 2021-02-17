@@ -17,7 +17,7 @@ Body.defaultProps = {
 };
 function Body(props) {
   const { onFilterCategory, onClickLoadBtn } = props;
-  const { categories, items, isShowAll } = props.data;
+  const { categories, items, isShowAll, isLoading } = props.data;
   return (
     <div className="body--bg">
       <div className="body">
@@ -44,11 +44,16 @@ function Body(props) {
         </div>
       </div>
       <div className="pagination">
-        {isShowAll && (
-          <button className="load-btn" onClick={onClickLoadBtn}>
-            More...
-          </button>
-        )}
+        {isShowAll &&
+          (isLoading ? (
+            <button className="load-btn">
+              Loading<div className="load-btn__loading"></div>
+            </button>
+          ) : (
+            <button className="load-btn" onClick={() => onClickLoadBtn()}>
+              More...
+            </button>
+          ))}
       </div>
     </div>
   );

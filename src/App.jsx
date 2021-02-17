@@ -5,8 +5,9 @@ import Body from "./components/body/Body";
 import queryString from "query-string";
 import Footer from "./components/Footer";
 function App() {
-  const [filters, setFilters] = useState({ page: 1, limit: 6 });
+  const [filters, setFilters] = useState({ page: 1, limit: 3 });
   const [max, setMax] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([{ _id: 0, name: "All" }]);
   const [items, setItems] = useState([]);
   const [isShowAll, setIsShowAll] = useState(true);
@@ -24,12 +25,10 @@ function App() {
   }
 
   async function loadMore() {
+    setIsLoading(true);
     let loadBtn = document.getElementsByClassName("load-btn")[0];
-    loadBtn.textContent = "Loading...";
     let newFilters = { ...filters, page: filters.page + 1 };
     setFilters(newFilters);
-
-    loadBtn.textContent = "More...";
   }
 
   async function fetchData() {
@@ -51,6 +50,7 @@ function App() {
     } else {
       setIsShowAll(true);
     }
+    setIsLoading(false);
   }
   //onFilterChange
   useEffect(() => {
@@ -73,7 +73,7 @@ function App() {
       <Body
         onFilterCategory={handleFilterCategory}
         onClickLoadBtn={loadMore}
-        data={{ categories, items, isShowAll }}
+        data={{ categories, items, isShowAll, isLoading }}
       />
       <Footer />
     </div>
