@@ -1,8 +1,19 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "../../scss/item.scss";
+
 class Item extends Component {
+  formatDate(dateString) {
+    let date = new Date(dateString);
+    date = date.toDateString().split(" ");
+    let day = date[2];
+    let month = date[1];
+    let year = date[3];
+    return `${month} ${day}, ${year}`;
+  }
   render() {
     let item = this.props.data;
+
     return (
       <div className="item">
         <div className="item__cover-img">
@@ -24,12 +35,14 @@ class Item extends Component {
               <p className="item__author--name">Yukine</p>
             </div>
             <p>-</p>
-            <p className="item__author--created">19/02/1999</p>
+            <p className="item__author--created">
+              {this.formatDate(item.created)}
+            </p>
           </div>
           <p className="item__desc">{item.content.slice(0, 200)}</p>
-          <a className="item__more" href="./">
+          <Link className="item__more" to={`/status/${item._id}`}>
             Read More
-          </a>
+          </Link>
         </div>
       </div>
     );

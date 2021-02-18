@@ -3,6 +3,7 @@ import Categories from "./Categories";
 import Item from "./Item";
 import "../../scss/body.scss";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 Body.propTypes = {
   onFilterCategory: PropTypes.func,
@@ -36,7 +37,11 @@ function Body(props) {
             items.length === 0 ? (
               <h1>Nothing to show</h1>
             ) : (
-              items.map((i) => <Item key={i._id} data={i} />)
+              items.map((i) => (
+                <Link to={`/status/${i._id}`}>
+                  <Item key={i._id} data={i} />
+                </Link>
+              ))
             )
           ) : (
             <h1>Loading...</h1>

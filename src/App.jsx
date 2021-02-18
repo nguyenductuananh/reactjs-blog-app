@@ -4,6 +4,10 @@ import { default as Header } from "./components/Header";
 import Body from "./components/body/Body";
 import queryString from "query-string";
 import Footer from "./components/Footer";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import AboutMe from "./components/body/AboutMe";
+import StatusDetail from "./components/StatusDetail";
+
 function App() {
   const [filters, setFilters] = useState({ page: 1, limit: 3 });
   const [max, setMax] = useState(0);
@@ -69,12 +73,24 @@ function App() {
 
   return (
     <div className="App">
-      <Header onChangeInputValue={handleSearchInputValueChange} />
-      <Body
-        onFilterCategory={handleFilterCategory}
-        onClickLoadBtn={loadMore}
-        data={{ categories, items, isShowAll, isLoading }}
-      />
+      <Router>
+        <Header onChangeInputValue={handleSearchInputValueChange} />
+        <Switch>
+          <Route exact path="/">
+            <Body
+              onFilterCategory={handleFilterCategory}
+              onClickLoadBtn={loadMore}
+              data={{ categories, items, isShowAll, isLoading }}
+            />
+          </Route>
+          <Route path="/about">
+            <AboutMe />
+          </Route>
+          <Route path="/status/:id">
+            <StatusDetail />
+          </Route>
+        </Switch>
+      </Router>
       <Footer />
     </div>
   );

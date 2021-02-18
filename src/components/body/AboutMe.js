@@ -1,4 +1,10 @@
 import React from "react";
-export default function AboutMe() {
-  return <div>About me!!!</div>;
+import PropTypes from "prop-types";
+
+AboutMe.propTypes = {};
+
+function AboutMe(props) {
+  return <div>About me page</div>;
 }
+
+export default AboutMe;
