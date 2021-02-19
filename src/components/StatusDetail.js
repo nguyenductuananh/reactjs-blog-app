@@ -22,7 +22,7 @@ function StatusDetail(props) {
     <div>
       <div className="status">
         <Link className="status__back-btn" to="/">
-          <i class="direct fa fa-chevron-left" aria-hidden="true"></i>Back
+          <i className="direct fa fa-chevron-left" aria-hidden="true"></i>Back
         </Link>
         <div
           className="status__bg--img"
@@ -32,7 +32,9 @@ function StatusDetail(props) {
         <div className="status__title">{status.title}</div>
         <div className="status__content">
           {status.content ? (
-            status.content.split("<br/>").map((p) => <p>{p}</p>)
+            status.content
+              .split("<br/>")
+              .map((p, index) => <p key={index}>{p}</p>)
           ) : (
             <div></div>
           )}

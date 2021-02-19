@@ -5,7 +5,6 @@ import Body from "./components/body/Body";
 import queryString from "query-string";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import AboutMe from "./components/body/AboutMe";
 import StatusDetail from "./components/StatusDetail";
 
 function App() {
@@ -30,7 +29,6 @@ function App() {
 
   async function loadMore() {
     setIsLoading(true);
-    let loadBtn = document.getElementsByClassName("load-btn")[0];
     let newFilters = { ...filters, page: filters.page + 1 };
     setFilters(newFilters);
   }
@@ -82,9 +80,6 @@ function App() {
               onClickLoadBtn={loadMore}
               data={{ categories, items, isShowAll, isLoading }}
             />
-          </Route>
-          <Route path="/about">
-            <AboutMe />
           </Route>
           <Route path="/status/:id">
             <StatusDetail />

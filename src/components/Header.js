@@ -24,9 +24,6 @@ function Header(props) {
           <Link to="/">
             <li className="header__nav--item">Home</li>
           </Link>
-          <Link to="/about">
-            <li className="header__nav--item">About Me</li>
-          </Link>
         </ul>
         <Search onChangeValue={onChangeInputValue} />
       </header>
