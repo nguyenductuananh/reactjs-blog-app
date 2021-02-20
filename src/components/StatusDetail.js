@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 import { Link, useParams } from "react-router-dom";
 import "../scss/status-detail.scss";
 function StatusDetail(props) {
-  const [status, setStatus] = useState({});
+  const [status, setStatus] = useState(null);
   let params = useParams();
   useEffect(() => {
     fetchData();
@@ -21,24 +22,46 @@ function StatusDetail(props) {
   return (
     <div>
       <div className="status">
-        <Link className="status__back-btn" to="/">
+        <Link
+          style={{ mixBlendMode: "difference" }}
+          className="status__back-btn"
+          to="/"
+        >
           <i className="direct fa fa-chevron-left" aria-hidden="true"></i>Back
         </Link>
-        <div
-          className="status__bg--img"
-          style={{ backgroundImage: `url(${status.imgPath})` }}
-        ></div>
-        <div className="status__date">{formatDate(status.created)}</div>
-        <div className="status__title">{status.title}</div>
-        <div className="status__content">
-          {status.content ? (
-            status.content
-              .split("<br/>")
-              .map((p, index) => <p key={index}>{p}</p>)
-          ) : (
-            <div></div>
-          )}
-        </div>
+        {status && (
+          <React.Fragment>
+            <div
+              className="status__bg--img"
+              style={{ backgroundImage: `url(${status.imgPath})` }}
+            ></div>
+            <div className="status__date">{formatDate(status.created)}</div>
+            <div className="status__title">{status.title}</div>
+            <div className="status__content">
+              {status.content &&
+                status.content
+                  .split("<br/>")
+                  .map((p, index) => <p key={index}>{p}</p>)}
+            </div>
+          </React.Fragment>
+        )}
+        {!status && (
+          <React.Fragment>
+            <div
+              className="status__bg--img"
+              style={{ backgroundImage: `url("")` }}
+            ></div>
+            <div className="status__date">
+              <Skeleton width={200} />
+            </div>
+            <div className="status__title">
+              <Skeleton width={500} />
+            </div>
+            <div className="status__content">
+              <Skeleton count={5} />
+            </div>
+          </React.Fragment>
+        )}
       </div>
     </div>
   );

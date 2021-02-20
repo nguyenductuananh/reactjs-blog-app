@@ -11,8 +11,8 @@ function App() {
   const [filters, setFilters] = useState({ page: 1, limit: 3 });
   const [max, setMax] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [categories, setCategories] = useState([{ _id: 0, name: "All" }]);
-  const [items, setItems] = useState([]);
+  const [categories, setCategories] = useState(null);
+  const [items, setItems] = useState(null);
   const [isShowAll, setIsShowAll] = useState(true);
   let urlPattern = "http://localhost:1902/api/";
 
@@ -22,7 +22,7 @@ function App() {
       page: 1,
       category: category === "All" ? "" : category,
     };
-    setItems([]);
+    setItems(null);
     setIsShowAll(true);
     setFilters(newFilter);
   }
@@ -40,14 +40,15 @@ function App() {
     );
     let newCategories = await cateRes.json();
     newCategories.data.push({ _id: 0, name: "All" });
-    let newItems = [...items];
+    let newItems = items ? [...items] : [];
     let itemsFetchedData = await itemRes.json();
-    newItems = newItems.concat(itemsFetchedData.data);
+    if (newItems) newItems = newItems.concat(itemsFetchedData.data);
+
     setCategories(newCategories.data);
     setItems(newItems);
     let newMax = itemsFetchedData.filters.max;
     setMax(newMax);
-    if (newItems.length === newMax) {
+    if (newItems && newItems.length === newMax) {
       setIsShowAll(false);
     } else {
       setIsShowAll(true);
@@ -57,7 +58,6 @@ function App() {
   //onFilterChange
   useEffect(() => {
     fetchData();
-    return () => {};
   }, [filters]);
 
   function handleSearchInputValueChange(val) {

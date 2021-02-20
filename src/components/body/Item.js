@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../scss/item.scss";
-
+import Skeleton from "react-loading-skeleton";
 class Item extends Component {
   formatDate(dateString) {
     let date = new Date(dateString);
@@ -23,27 +23,63 @@ class Item extends Component {
             src="https://picsum.photos/600/600"
           />
         </div>
-        <div>
-          <h5 className="item__categories">{item.categories.join(", ")}</h5>
-          <h5 className="item__title">{item.title}</h5>
-          <div className="item__author">
-            <div className="item__author--info">
-              <img
-                className="item__author--avatar"
-                src="https://picsum.photos/600/600"
-              />
-              <p className="item__author--name">Yukine</p>
+        {item && (
+          <div>
+            <h5 className="item__categories">{item.categories.join(", ")}</h5>
+            <h5 className="item__title">{item.title}</h5>
+            <div className="item__author">
+              <div className="item__author--info">
+                <img
+                  className="item__author--avatar"
+                  src="https://picsum.photos/600/600"
+                />
+                <p className="item__author--name">Yukine</p>
+              </div>
+              <p>-</p>
+              <p className="item__author--created">
+                {this.formatDate(item.created)}
+              </p>
             </div>
-            <p>-</p>
-            <p className="item__author--created">
-              {this.formatDate(item.created)}
+            <p className="item__desc">{item.content.slice(0, 200)}</p>
+            <p
+              style={{ width: "fit-content" }}
+              className="item__more"
+              to={`/status/${item._id}`}
+            >
+              Read More
             </p>
           </div>
-          <p className="item__desc">{item.content.slice(0, 200)}</p>
-          <Link className="item__more" to={`/status/${item._id}`}>
-            Read More
-          </Link>
-        </div>
+        )}
+        {!item && (
+          <div>
+            <h5 className="item__categories">
+              <Skeleton />
+            </h5>
+            <h5 className="item__title">
+              <Skeleton />
+            </h5>
+            <div className="item__author">
+              <div className="item__author--info">
+                <img
+                  className="item__author--avatar"
+                  src="https://picsum.photos/600/600"
+                />
+                <p className="item__author--name">
+                  <Skeleton />
+                </p>
+              </div>
+              <p className="item__author--created">
+                <Skeleton />
+              </p>
+            </div>
+            <p className="item__desc">
+              <Skeleton count={3} width="100%" />
+            </p>
+            <div className="item__more" style={{ width: "fit-content" }}>
+              <Skeleton />
+            </div>
+          </div>
+        )}
       </div>
     );
   }

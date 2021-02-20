@@ -13,7 +13,7 @@ Body.propTypes = {
 
 Body.defaultProps = {
   onFilterCategory: null,
-  data: {},
+  data: { categories: null, items: null, isLoading: null, isShowAll: null },
   onClickLoadBtn: null,
 };
 function Body(props) {
@@ -25,26 +25,27 @@ function Body(props) {
         <div className="body__title">Explore</div>
         <div className="body__categories">
           {/* <Search onChangeValue={handleSearchInputValueChange} /> */}
-          <Categories
-            onClickCategory={onFilterCategory}
-            data={categories ? categories : []}
-          />
+          <Categories onClickCategory={onFilterCategory} data={categories} />
         </div>
         <div className="body__title">Our Stories</div>
         <br />
         <div className="body__items" id="list">
-          {items ? (
-            items.length === 0 ? (
+          {items &&
+            (items.length === 0 ? (
               <h1>Nothing to show</h1>
             ) : (
-              items.map((i) => (
-                <Link to={`/status/${i._id}`}>
+              items.map((i, index) => (
+                <Link key={index} to={`/status/${i._id}`}>
                   <Item key={i._id} data={i} />
                 </Link>
               ))
-            )
-          ) : (
-            <h1>Loading...</h1>
+            ))}
+          {!items && (
+            <React.Fragment>
+              <Item key={1} />
+              <Item key={2} />
+              <Item key={3} />
+            </React.Fragment>
           )}
         </div>
       </div>
