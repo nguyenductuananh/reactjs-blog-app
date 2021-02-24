@@ -4,8 +4,15 @@ import { default as Header } from "./components/Header";
 import Body from "./components/body/Body";
 import queryString from "query-string";
 import Footer from "./components/Footer";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import StatusDetail from "./components/StatusDetail";
+import Login from "./components/Login";
+import { useCookies } from "react-cookie";
 
 function App() {
   const [filters, setFilters] = useState({ page: 1, limit: 3 });
@@ -14,6 +21,7 @@ function App() {
   const [categories, setCategories] = useState(null);
   const [items, setItems] = useState(null);
   const [isShowAll, setIsShowAll] = useState(true);
+  const [cookies, setCookie] = useCookies(["id", "name"]);
   let urlPattern = "http://localhost:1902/api/";
 
   async function handleFilterCategory(category) {
@@ -59,7 +67,6 @@ function App() {
   useEffect(() => {
     fetchData();
   }, [filters]);
-
   function handleSearchInputValueChange(val) {
     let newFilters = { ...filters, page: 1 };
     newFilters.name = val.name;
@@ -68,11 +75,26 @@ function App() {
     setIsShowAll(true);
     setFilters(newFilters);
   }
-
+  async function handleLogin(data) {
+    const postObject = {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data), // body data type must match "Content-Type" header
+    };
+    let response = await fetch(`${urlPattern}account`, postObject);
+    let resData = await response.json();
+    setCookie("name", resData.name);
+    setCookie("id", resData._id);
+  }
   return (
     <div className="App">
       <Router>
-        <Header onChangeInputValue={handleSearchInputValueChange} />
+        <Header
+          username={cookies.name}
+          onChangeInputValue={handleSearchInputValueChange}
+        />
         <Switch>
           <Route exact path="/">
             <Body
@@ -83,6 +105,14 @@ function App() {
           </Route>
           <Route path="/status/:id">
             <StatusDetail />
+          </Route>
+
+          <Route exact path="/login">
+            {cookies.id ? (
+              <Redirect to="./" />
+            ) : (
+              <Login handleFormSubmit={handleLogin} />
+            )}
           </Route>
         </Switch>
       </Router>
