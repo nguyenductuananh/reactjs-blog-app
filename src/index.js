@@ -21,6 +21,10 @@ let searchIcon = document.getElementsByClassName("search__icon")[0];
 let searchInput = document.getElementsByClassName("search__input")[0];
 
 document.addEventListener("click", (event) => {
+  if (window.location.origin + "/" !== window.location.href) {
+    searchInput.disabled = "true";
+    return;
+  } else searchInput.disabled = "";
   if (
     toggle &&
     !event.composedPath().includes(searchIcon) &&
