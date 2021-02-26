@@ -5,7 +5,22 @@
   width: 100%;
   cursor: pointer;
   &__list {
+    width: 100%;
     @include flexbox(row);
+    overflow-y: auto;
+    padding-bottom: 1rem;
+    &::-webkit-scrollbar {
+      height: 10px;
+      background-color: rgb(233, 233, 233);
+      border-radius: 1rem;
+    }
+    &::-webkit-scrollbar-track {
+      height: 20px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 1rem;
+      background-color: rgb(190, 190, 190);
+    }
   }
   &__item {
     height: 35rem;

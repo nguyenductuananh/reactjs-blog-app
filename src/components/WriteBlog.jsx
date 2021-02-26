@@ -9,6 +9,7 @@ import {
   Label,
   Container,
 } from "reactstrap";
+import { withRouter } from "react-router-dom";
 import "../scss/css/bootstrap.css";
 WriteBlog.propTypes = {
   categories: PropTypes.array,
@@ -71,10 +72,13 @@ function WriteBlog(props) {
       const data = { name: category };
       onAddCategory(data);
       setShowInput(!showInput);
+      e.preventDefault();
+      return false;
     }
   }
 
   function handleFormSubmit(e) {
+    e.preventDefault();
     const data = {
       categories: choosedCategories,
       content,
@@ -83,7 +87,7 @@ function WriteBlog(props) {
       created: new Date().toISOString(),
     };
     onAddStatus(data);
-    e.preventDefault();
+    props.history.push("/");
   }
   const containerStyle = { fontSize: "1.6rem", marginBottom: "4rem" };
   return (
@@ -93,7 +97,7 @@ function WriteBlog(props) {
           <h1 className="text-center mb-5 fs-1">Write about you want😊</h1>
         </Row>
         <div className="w-100"></div>
-        <Form onSubmit={(e) => handleFormSubmit(e)}>
+        <Form>
           <FormGroup>
             <Label className="fw-bold" for="title">
               Title <span className="fw-normal">(Max : 100 characters)</span>
@@ -175,7 +179,11 @@ function WriteBlog(props) {
             {!categories && <h1>Loading</h1>}
           </FormGroup>
           <FormGroup className="d-flex justify-content-center">
-            <Button className="fs-4" color="info" type="submit">
+            <Button
+              className="fs-4"
+              color="info"
+              onClick={(e) => handleFormSubmit(e)}
+            >
               Post
             </Button>
           </FormGroup>
@@ -185,4 +193,4 @@ function WriteBlog(props) {
   );
 }
 
-export default WriteBlog;
+export default withRouter(WriteBlog);
