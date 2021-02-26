@@ -9,10 +9,7 @@ class Categories extends Component {
         <ul className="categories__list">
           {categories &&
             categories.map((c) => (
-              <li
-                key={c._id}
-                onClick={() => this.props.onClickCategory(c.name)}
-              >
+              <li key={c._id} onClick={() => this.props.onClickCategory(c._id)}>
                 <div className="categories__item">
                   <div className="categories__item--title">{c.name}</div>
                 </div>

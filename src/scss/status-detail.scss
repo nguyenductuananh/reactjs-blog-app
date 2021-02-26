@@ -1,7 +1,6 @@
 @import "./mixins";
 
 .status {
-  margin-top: 9rem;
   width: 100%;
   position: relative;
   @include flexbox(column, center, center);

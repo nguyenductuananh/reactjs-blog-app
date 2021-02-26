@@ -91,10 +91,9 @@ function WriteBlog(props) {
       title,
       created: new Date().toISOString(),
     };
-    console.log("SUBMIT");
-    // onAddStatus(data);
+    onAddStatus(data);
     e.preventDefault();
-    // props.history.push("/");
+    props.history.push("/");
   }
   const btnStyle = { width: "100px", fontSize: "1.4rem" };
   const containerStyle = { fontSize: "1.6rem", marginBottom: "4rem" };
@@ -186,7 +185,7 @@ function WriteBlog(props) {
                   <Label key={c._id}>
                     <Input
                       type="checkbox"
-                      value={c.name.toLowerCase()}
+                      value={c._id}
                       onChange={(e) => handleCheckBox(e.target)}
                       disabled={c.name === "All"}
                     />

@@ -39,7 +39,7 @@ function App() {
     let newFilter = {
       ...filters,
       page: 1,
-      category: category === "All" ? "" : category,
+      category: category === "0" ? "" : category,
     };
     setItems(null);
     setIsShowAll(true);
@@ -58,7 +58,7 @@ function App() {
       urlPattern + "/status?" + queryString.stringify(filters)
     );
     let newCategories = await cateRes.json();
-    newCategories.data.push({ _id: 0, name: "All" });
+    newCategories.data.push({ _id: "0", name: "All" });
     let newItems = items ? [...items] : [];
     let itemsFetchedData = await itemRes.json();
     if (newItems) newItems = newItems.concat(itemsFetchedData.data);
@@ -140,7 +140,7 @@ function App() {
           username={cookies.name}
           onChangeInputValue={handleSearchInputValueChange}
         />
-        <div style={{ marginTop: "16rem" }}></div>
+        <div style={{ marginTop: "8rem" }}></div>
         <Switch>
           <Route exact path="/">
             <Body
