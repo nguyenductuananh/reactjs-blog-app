@@ -9,7 +9,7 @@ import {
   Label,
   Container,
 } from "reactstrap";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "../scss/css/bootstrap.css";
 WriteBlog.propTypes = {
   categories: PropTypes.array,
@@ -50,6 +50,7 @@ function WriteBlog(props) {
       document.querySelector("#add-btn").textContent = "Cancel";
     } else {
       document.querySelector("#add-btn").textContent = "Add";
+      document.querySelector("#err").textContent = "";
     }
   }, [showInput]);
   function handleClickAddCategoryBtn() {
@@ -68,17 +69,21 @@ function WriteBlog(props) {
   }
 
   function handleAddCategory(e) {
+    let err = document.querySelector("#err");
     if (e.code === "Enter") {
+      if (!category) {
+        err.textContent = "Can't add a blank category!!";
+        return;
+      }
       const data = { name: category };
       onAddCategory(data);
       setShowInput(!showInput);
-      e.preventDefault();
-      return false;
+      err.textContent = "";
+      setCategory("");
     }
   }
 
   function handleFormSubmit(e) {
-    e.preventDefault();
     const data = {
       categories: choosedCategories,
       content,
@@ -86,9 +91,12 @@ function WriteBlog(props) {
       title,
       created: new Date().toISOString(),
     };
-    onAddStatus(data);
-    props.history.push("/");
+    console.log("SUBMIT");
+    // onAddStatus(data);
+    e.preventDefault();
+    // props.history.push("/");
   }
+  const btnStyle = { width: "100px", fontSize: "1.4rem" };
   const containerStyle = { fontSize: "1.6rem", marginBottom: "4rem" };
   return (
     <Container style={containerStyle}>
@@ -97,7 +105,8 @@ function WriteBlog(props) {
           <h1 className="text-center mb-5 fs-1">Write about you want😊</h1>
         </Row>
         <div className="w-100"></div>
-        <Form>
+        <Form onSubmit={(e) => handleFormSubmit(e)}>
+          {/* TITLE */}
           <FormGroup>
             <Label className="fw-bold" for="title">
               Title <span className="fw-normal">(Max : 100 characters)</span>
@@ -107,8 +116,10 @@ function WriteBlog(props) {
               value={title}
               onChange={(e) => handleInputChangeValue(e.target.value, "title")}
               maxLength="100"
+              required
             />
           </FormGroup>
+          {/* COVER URL */}
           <FormGroup>
             <Label className="fw-bold" for="imgPath">
               Cover Pic URL
@@ -121,8 +132,10 @@ function WriteBlog(props) {
                 handleInputChangeValue(e.target.value, "imgPath")
               }
               rows="10"
+              required
             />
           </FormGroup>
+          {/* CONTENT */}
           <FormGroup>
             <Label className="fw-bold" for="content">
               Content
@@ -135,8 +148,10 @@ function WriteBlog(props) {
                 handleInputChangeValue(e.target.value, "content")
               }
               rows="10"
+              required
             />
           </FormGroup>
+          {/* CATEGORIES */}
           <FormGroup>
             <Label className="fw-bold">Categories</Label>{" "}
             <Button
@@ -148,6 +163,7 @@ function WriteBlog(props) {
             >
               Add
             </Button>
+            <span style={{ marginLeft: "2rem", color: "red" }} id="err"></span>
             <br></br>
             <div id="bonus-area">
               {showInput && (
@@ -157,7 +173,9 @@ function WriteBlog(props) {
                   onChange={(e) => {
                     handleInputChangeValue(e.target.value, "category");
                   }}
-                  onKeyUp={(e) => handleAddCategory(e)}
+                  onKeyPress={(e) => {
+                    handleAddCategory(e);
+                  }}
                   placeholder="Eg : World, Toy,...."
                 />
               )}
@@ -178,14 +196,18 @@ function WriteBlog(props) {
               ))}
             {!categories && <h1>Loading</h1>}
           </FormGroup>
-          <FormGroup className="d-flex justify-content-center">
+          <FormGroup className="d-flex justify-content-around">
             <Button
+              style={btnStyle}
               className="fs-4"
               color="info"
-              onClick={(e) => handleFormSubmit(e)}
+              type="submit"
             >
               Post
             </Button>
+            <Link style={btnStyle} className="btn btn-warning" to="/">
+              Go Back
+            </Link>
           </FormGroup>
         </Form>
       </Row>
