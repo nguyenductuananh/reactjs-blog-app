@@ -1,7 +1,23 @@
 // @import "./mixins";
 
 .item {
-  height: 620px;
+  @include Responsive(XS) {
+    height: 280px;
+    @include flexbox(row, space-between, center);
+  }
+  @include Responsive(SM) {
+    height: 520px;
+    display: block;
+  }
+  @include Responsive(MD) {
+    display: block;
+    height: 590px;
+  }
+  @include Responsive(XL) {
+    display: block;
+    height: 620px;
+  }
+
   width: 98%;
   font-size: 1.8rem;
   overflow: hidden;
@@ -9,8 +25,24 @@
   cursor: pointer;
   position: relative;
   &__cover-img {
-    width: 100%;
-    height: 60%;
+    @include Responsive(XS) {
+      // height: 70%;
+      width: 30%;
+      // @include flexbox(row, center, center);
+    }
+    @include Responsive(SM) {
+      width: 100%;
+      // height: 52%;
+    }
+    @include Responsive(MD) {
+      width: 100%;
+      // width: 60%;
+    }
+    @include Responsive(XL) {
+      // height: 60%;
+      width: 100%;
+    }
+
     overflow: hidden;
     object-fit: cover;
     &::after {
@@ -37,7 +69,20 @@
   &:hover > &__cover-img img {
     transform: scale(1.1);
   }
-
+  &__info {
+    @include Responsive(XS) {
+      width: 66%;
+    }
+    @include Responsive(SM) {
+      width: 100%;
+    }
+    @include Responsive(MD) {
+      width: 100%;
+    }
+    @include Responsive(XL) {
+      width: 100%;
+    }
+  }
   &__categories {
     margin: 2rem 0rem;
     font-weight: 500;
@@ -55,9 +100,27 @@
   }
 
   &__author {
-    width: 60%;
+    // Reset p margin
+    p {
+      margin-bottom: 0;
+    }
+    @include Responsive(XS) {
+      width: 60%;
+      @include flexbox(row, space-around, center);
+    }
+    @include Responsive(SM) {
+      width: 80%;
+      @include flexbox(row, space-between, center);
+    }
+    @include Responsive(MD) {
+      width: 70%;
+      @include flexbox(row, space-between, center);
+    }
+    @include Responsive(XL) {
+      width: 60%;
+      @include flexbox(row, space-between, center);
+    }
     height: 60px;
-    @include flexbox(row, space-between, center);
     &--info {
       width: min-content;
       @include flexbox(row, flex-start, center);
@@ -75,8 +138,17 @@
     }
 
     &--created {
-      font-size: 1.4rem;
+      height: 30%;
       opacity: 0.8;
+      @include Responsive(XS) {
+        font-size: 1.2rem;
+      }
+      @include Responsive(SM) {
+        font-size: 1.2rem;
+      }
+      @include Responsive(XL) {
+        font-size: 1.4rem;
+      }
     }
   }
 

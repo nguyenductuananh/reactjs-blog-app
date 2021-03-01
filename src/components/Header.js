@@ -31,7 +31,7 @@ function Header(props) {
         </ul>
         <Search onChangeValue={onChangeInputValue} />
         {username ? (
-          <h3>Hello, {`${username}`}</h3>
+          <h3 className="header__username">Hello, {`${username}`}</h3>
         ) : (
           <Link className="header__nav--item" to="/login">
             Login now!

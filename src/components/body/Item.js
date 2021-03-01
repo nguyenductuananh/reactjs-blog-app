@@ -22,7 +22,7 @@ class Item extends Component {
           />
         </div>
         {item && (
-          <div>
+          <div className="item__info">
             <h5 className="item__categories">{item.categories.join(", ")}</h5>
             <h5 className="item__title">{item.title}</h5>
             <div className="item__author">

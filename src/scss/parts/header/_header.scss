@@ -1,16 +1,26 @@
-// @import "./mixins";
-
 .header {
   width: 100%;
   height: 80px;
   @include flexbox(row, center, center);
   background: linear-gradient(to right, rgb(231, 191, 208), #dad1f3);
   z-index: 20;
-  position: sticky;
+  position: relative;
   top: 0;
   left: 0;
+  transition: 0.4s all;
   header {
-    width: $width;
+    @include Responsive(XL) {
+      width: $XL-width;
+    }
+    @include Responsive(MD) {
+      width: $MD-width;
+    }
+    @include Responsive(SM) {
+      width: $SM-width;
+    }
+    @include Responsive(XS) {
+      width: $XS-width;
+    }
     height: 100%;
     @include flexbox(row, space-between, center);
   }
@@ -24,7 +34,21 @@
     }
   }
   &__nav {
-    width: 15%;
+    @include Responsive(XS) {
+      display: none;
+    }
+    @include Responsive(SM) {
+      display: flex;
+    }
+    @include Responsive(MD) {
+      display: flex;
+    }
+    @include Responsive(XL) {
+      display: flex;
+    }
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    width: 20%;
     height: 100%;
     @include flexbox(row, space-between, center);
     a {
@@ -39,5 +63,35 @@
       text-decoration: none;
       color: black;
     }
+  }
+  &__username {
+    @include Responsive(XS) {
+      display: none;
+    }
+    @include Responsive(SM) {
+      display: none;
+    }
+    @include Responsive(MD) {
+      display: block;
+      font-size: 1.6rem;
+    }
+    @include Responsive(XL) {
+      display: block;
+      font-size: 1.8rem;
+    }
+  }
+
+  &.activeSticky {
+    position: sticky;
+    animation: stickyHeaderAnimation 0.1s 1 forwards;
+  }
+}
+
+@keyframes stickyHeaderAnimation {
+  0% {
+    top: -80px;
+  }
+  100% {
+    top: 0px;
   }
 }

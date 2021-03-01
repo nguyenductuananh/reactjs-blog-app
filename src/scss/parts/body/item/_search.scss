@@ -2,7 +2,9 @@
 
 .search {
   @include flexbox(row, flex-end, center);
-  width: 20%;
+  @include Responsive(XL) {
+    width: 20%;
+  }
   padding: 0.5rem 1rem;
   border-radius: 2rem;
   transition: 0.4s all ease-in-out;

@@ -3,7 +3,6 @@
 .categories {
   margin-top: 3rem;
   width: 100%;
-  cursor: pointer;
   &__list {
     width: 100%;
     @include flexbox(row);
@@ -23,9 +22,25 @@
     }
   }
   &__item {
-    height: 35rem;
+    @include Responsive(XS) {
+      height: 15rem;
+      width: 10rem;
+    }
+    @include Responsive(SM) {
+      height: 22rem;
+      width: 13rem;
+    }
+    @include Responsive(MD) {
+      height: 25rem;
+      width: 17rem;
+    }
+    @include Responsive(XL) {
+      height: 33rem;
+      width: 23rem;
+    }
+
+    cursor: pointer;
     border-radius: 2rem;
-    width: 23rem;
     margin-right: 2rem;
 
     background-image: url(https://picsum.photos/600/600);
@@ -49,12 +64,24 @@
       background-image: linear-gradient(180deg, $primary-pink, $primary-pink);
     }
     &--title {
+      @include Responsive(XS) {
+        font-size: 1.2rem;
+      }
+      @include Responsive(SM) {
+        font-size: 1.5rem;
+      }
+      @include Responsive(MD) {
+        font-size: 1.7rem;
+      }
+      @include Responsive(XL) {
+        font-size: 1.9rem;
+      }
       font-size: 1.9rem;
       color: white;
       text-transform: uppercase;
 
       position: absolute;
-      top: 86%;
+      top: 80%;
       left: 50%;
       transform: translateX(-50%);
       z-index: 3;

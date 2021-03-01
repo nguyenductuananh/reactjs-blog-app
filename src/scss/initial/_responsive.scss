@@ -1,14 +1,14 @@
 $XL: 1200px;
 $MD: 1000px;
-$SM: 800px;
-$XS: 480px;
+$SM: 850px;
+$XS: 550px;
 
 $XL-width: 85%;
 $MD-width: 90%;
 $SM-width: 90%;
 $XS-width: 90%;
 
-@mixin Resposive($canvas: $XL) {
+@mixin Responsive($canvas: $XL) {
   @if ($canvas == XS) {
     @media only screen and (min-width: $XS) {
       @content;

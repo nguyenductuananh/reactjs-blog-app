@@ -38,6 +38,13 @@ document.addEventListener("click", (event) => {
     toggle = !toggle;
   }
 });
+document.addEventListener("scroll", (e) => {
+  if (window.pageYOffset >= 100) {
+    document.querySelector(".header").classList.add("activeSticky");
+  } else {
+    document.querySelector(".header").classList.remove("activeSticky");
+  }
+});
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

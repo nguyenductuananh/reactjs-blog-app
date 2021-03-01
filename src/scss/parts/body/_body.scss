@@ -3,21 +3,47 @@
   width: 100%;
   .body {
     margin: 0px auto;
-    width: $width;
+    @include Responsive(XL) {
+      width: $XL-width;
+    }
+    @include Responsive(MD) {
+      width: $MD-width;
+    }
+    @include Responsive(SM) {
+      width: $SM-width;
+    }
+    @include Responsive(XS) {
+      width: $XS-width;
+    }
     &__categories {
-      margin-bottom: 10rem;
+      margin-bottom: 5rem;
     }
 
     &__title {
+      @include Responsive(XS) {
+        width: 17rem;
+        font-size: 3.2rem;
+      }
+      @include Responsive(SM) {
+        width: 18rem;
+        font-size: 3.5rem;
+      }
+      @include Responsive(MD) {
+        width: 20rem;
+        font-size: 3.8rem;
+      }
+      @include Responsive(XL) {
+        width: 22rem;
+        font-size: 4rem;
+      }
       position: relative;
-      width: 220px;
+
       text-align: center;
-      font-size: 4rem;
       margin-top: 3rem;
       font-family: "Playfair Display", serif;
       &::after {
         content: "";
-        height: 60%;
+        height: 50%;
         width: 100%;
         background-color: #c6d2ff75;
 
@@ -33,10 +59,25 @@
       margin-top: 2.2rem;
       margin-left: auto;
       overflow: hidden;
-      display: grid;
-      grid-template-columns: 32% 32% 32%;
+
       column-gap: 20px;
       row-gap: 25px;
+
+      @include Responsive(XS) {
+        display: block;
+      }
+      @include Responsive(SM) {
+        display: grid;
+        grid-template-columns: 32% 32% 32%;
+      }
+      @include Responsive(MD) {
+        display: grid;
+        grid-template-columns: 32% 32% 32%;
+      }
+      @include Responsive(XL) {
+        display: grid;
+        grid-template-columns: 32% 32% 32%;
+      }
     }
   }
   .pagination {
