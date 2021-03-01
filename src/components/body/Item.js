@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "../../scss/item.scss";
 import Skeleton from "react-loading-skeleton";
 class Item extends Component {
   formatDate(dateString) {

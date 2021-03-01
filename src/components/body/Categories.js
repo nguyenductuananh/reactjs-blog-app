@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Skeleton from "react-loading-skeleton";
-import "../../scss/categories.scss";
 class Categories extends Component {
   render() {
     let categories = this.props.data;

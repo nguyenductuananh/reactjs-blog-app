@@ -1,4 +1,4 @@
-@import "./mixins";
+// @import "./mixins";
 
 .header {
   width: 100%;
@@ -6,7 +6,7 @@
   @include flexbox(row, center, center);
   background: linear-gradient(to right, rgb(231, 191, 208), #dad1f3);
   z-index: 20;
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   header {

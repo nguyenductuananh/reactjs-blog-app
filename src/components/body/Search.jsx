@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 
-import "../../scss/search.scss";
 Search.propTypes = {
   onChangeValue: PropTypes.func,
 };

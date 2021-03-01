@@ -1,7 +1,6 @@
 import React from "react";
 import Categories from "./Categories";
 import Item from "./Item";
-import "../../scss/body.scss";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 

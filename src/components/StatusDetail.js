@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Link, useParams } from "react-router-dom";
-import "../scss/status-detail.scss";
 function StatusDetail(props) {
   const [status, setStatus] = useState(null);
   let params = useParams();

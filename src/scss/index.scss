@@ -1,7 +1,15 @@
-@import "./reset";
-@import "./mixins";
+@import "./initial/reset";
+@import "./initial/mixins";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100;200;300;400;500;600;700&display=swap");
+
+@import "./parts/header/header";
+@import "./parts/body/body";
+@import "./parts/body/item/categories";
+@import "./parts/body/item/item";
+@import "./parts/body/item/search";
+@import "./parts/body/item/status-detail";
+@import "./parts/footer/footer";
 html {
   font-size: 62.5%;
 }
